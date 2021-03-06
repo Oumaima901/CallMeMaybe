@@ -4,22 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage"
+    tools:context=".ContactPage"
     android:orientation="vertical"
     android:padding="20dp">
-
     <ImageView
         android:id="@+id/logo_img"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/call"
         android:transitionName="logo_image_animation"/>
     <TextView
-        android:id="@+id/txt_home_WC"
+        android:id="@+id/Show_Contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello there, Welcome "
-        android:textSize="40sp"
+        android:text="Contacts"
+        android:textSize="25sp"
         android:textColor="#000"
         android:fontFamily="sans-serif-condensed-light"/>
 
@@ -29,35 +28,28 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
-        <Button
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000"
-            android:textColor="#fff"
-            android:text="New Contact"
-            android:id="@+id/btn_add_home"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#000"
-            android:textColor="#fff"
-            android:text="Contact List"
-            android:id="@+id/btn_list_contact"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            />
+            android:id="@+id/txt_search"
+            android:hint="Enter a key"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-
-
-
-
-
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </LinearLayout>
-
