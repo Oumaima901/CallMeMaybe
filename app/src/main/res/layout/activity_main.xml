@@ -14,7 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="125dp"
-        android:src="@drawable/call"></ImageView>
+        android:src="@drawable/call"
+        android:transitionName="logo_image_animation"
+        ></ImageView>
 
     <ImageView
         android:id="@+id/imgtext"
