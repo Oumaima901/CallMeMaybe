@@ -2,6 +2,7 @@ package com.example.contactapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,13 @@ public class AddContact extends AppCompatActivity {
    btnA_Add.setOnClickListener(new View.OnClickListener() {
        @Override
        public void onClick(View v) {
-           
+           String name = inputadd_name.getEditText().getText().toString();
+           String lastname = inputadd_lastname.getEditText().getText().toString();
+           String number = inputadd_number.getEditText().getText().toString();
+           Contact c = new Contact(name,lastname,number);
+           HomePage.data.add(c);
+           Intent in = new Intent(AddContact.this,ContactPage.class);
+           startActivity(in);
        }
    });
 

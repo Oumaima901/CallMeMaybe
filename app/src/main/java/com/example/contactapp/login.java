@@ -24,15 +24,6 @@ public class login extends AppCompatActivity implements View.OnClickListener {
         inputPasswd = findViewById(R.id.txt_password);
         btnGo = findViewById(R.id.btn_go);
         btnLeave = findViewById(R.id.btn_leave);
-
-        /*txtUsername = findViewById(R.id.txt_username);
-        txtPasswd = findViewById(R.id.txt_password);
-        TextInputLayout textInputLayout = findViewById(R.id.custom_end_icon);
-         String text = textInputLayout.getEditText().getText();
-        btnGo = findViewById(R.id.btn_go);
-        btnLeave = findViewById(R.id.btn_leave);
-*/
-
         btnGo.setOnClickListener(this);
         btnLeave.setOnClickListener(this);
     }
