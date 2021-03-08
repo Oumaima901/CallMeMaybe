@@ -5,17 +5,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ContactAdapter  extends BaseAdapter {
+public class ContactAdapter  extends BaseAdapter implements Filterable {
     Context con ;
     ArrayList<Contact> data ;
+    ArrayList<Contact> Filterlist;
+     ValueFilter valueFilter;
     public ContactAdapter( Context con, ArrayList<Contact> data){
   this.con= con;
   this.data = data;
+  Filterlist= data;
     }
     @Override
     public int getCount() {
@@ -56,4 +61,52 @@ public class ContactAdapter  extends BaseAdapter {
 
         return LayoutView;
     }
+
+    @Override
+    public Filter getFilter() {
+        if (valueFilter == null){
+            valueFilter = new ValueFilter();
+        }
+        return valueFilter;
+    }
+//we create an inner class extends the filter class
+    private class ValueFilter extends Filter {
+
+    @Override
+    protected FilterResults performFiltering(CharSequence constraint) {
+        //constraint it's the value that the user should type to filter
+        //instance de filterResults
+        FilterResults results = new FilterResults();
+        //check if the user has typed a constraint
+        if(constraint != null && constraint.length()>0){
+            //the user typed so we create a new arraylist of contact that will hold our new filter
+            ArrayList<Contact> filters = new ArrayList<Contact>();
+            //get the specific items
+            for (int i=0; i<Filterlist.size();i++){
+                //if our constraint is matches our item in the filterlist then we add that data
+                // (we filter by name nd we check that particular item with contains)
+                if((Filterlist.get(i).getName().toUpperCase()).contains(constraint.toString().toUpperCase())){
+                  //so get the name nd the other items
+                   Contact con = new Contact(Filterlist.get(i).getName(),Filterlist.get(i).getLastname(),Filterlist.get(i).getNumber());
+                    filters.add(con);
+                }
+            }
+            results.count = filters.size();
+            results.values = filters;
+        }
+        else{
+            results.count = Filterlist.size();
+            results.values = Filterlist;
+
+        }
+        return results;
+    }
+
+    @Override
+    protected void publishResults(CharSequence constraint, FilterResults results) {
+        //to publish our result
+     data = (ArrayList<Contact>) results.values;
+     notifyDataSetChanged();// refresh
+    }
+}
 }

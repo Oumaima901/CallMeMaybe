@@ -5,25 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-public class ContactPage extends AppCompatActivity implements AdapterView.OnItemClickListener ,DialogInterface.OnClickListener{
+public class ContactPage extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener, AdapterView.OnItemLongClickListener {
  ListView ContactListV;
-    TextInputLayout inputReKey;
+    SearchView searchContact;
 int indice =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_page);
         ContactListV = findViewById(R.id.listViewContact);
-        inputReKey = findViewById(R.id.txt_search);
+        searchContact = findViewById(R.id.txt_search);
 
         //creation de l'adapter
         ContactAdapter Con_AD = new ContactAdapter(ContactPage.this,HomePage.data);
@@ -31,6 +33,23 @@ int indice =0;
 
         //events for the click one for the edit delete,nd delete all
         ContactListV.setOnItemClickListener(this);
+        //events for the call
+        ContactListV.setOnItemLongClickListener(this);
+
+        searchContact.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //we call the getfilter method
+                Con_AD.getFilter().filter(newText);
+                return false;
+            }
+        });
 
     }
 
@@ -82,5 +101,17 @@ int indice =0;
             ContactListV.invalidateViews();//update the list
 
         }
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+       //call the number selected
+        String number = HomePage.data.get(position).getNumber();
+        //call begin
+        Intent i = new Intent(Intent.ACTION_DIAL);
+        i.setData(Uri.parse("tel:"+number));
+        startActivity(i);
+
+        return false;
     }
 }
