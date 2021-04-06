@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -19,6 +20,7 @@ import com.google.android.material.textfield.TextInputLayout;
 public class ContactPage extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener, AdapterView.OnItemLongClickListener {
  ListView ContactListV;
     SearchView searchContact;
+    Button leaveButton;
 int indice =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ int indice =0;
         setContentView(R.layout.activity_contact_page);
         ContactListV = findViewById(R.id.listViewContact);
         searchContact = findViewById(R.id.txt_search);
+        leaveButton = findViewById(R.id.btnleave);
 
         //creation de l'adapter
         ContactAdapter Con_AD = new ContactAdapter(ContactPage.this,HomePage.data);
@@ -35,6 +38,12 @@ int indice =0;
         ContactListV.setOnItemClickListener(this);
         //events for the call
         ContactListV.setOnItemLongClickListener(this);
+        leaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         searchContact.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

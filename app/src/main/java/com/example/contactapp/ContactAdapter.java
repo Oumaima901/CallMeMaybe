@@ -43,7 +43,7 @@ public class ContactAdapter  extends BaseAdapter implements Filterable {
         //creation d'un view
         LayoutInflater inf = LayoutInflater.from(con);
         LinearLayout LayoutView = (LinearLayout) inf.inflate(R.layout.contact_view,null);
-      //get the elements from the contact viw layout and put it in the data(contact)
+      //get the elements from the contact view layout and put it in the data(contact)
 
         //get the componenets from the contact view
         TextView txt_name = LayoutView.findViewById(R.id.contact_view_name);
@@ -105,7 +105,7 @@ public class ContactAdapter  extends BaseAdapter implements Filterable {
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
         //to publish our result
-     data = (ArrayList<Contact>) results.values;
+        data = (ArrayList<Contact>) results.values;
      notifyDataSetChanged();// refresh
     }
 }
